@@ -2,7 +2,8 @@ import React from 'react';
 
 import CanvasBg from '@/components/CanvasBg';
 
-import LeftContent from './parts/left';
+import Center from './parts/center';
+import Left from './parts/left';
 import styles from './style.module.less';
 
 export default function Page1() {
@@ -13,9 +14,9 @@ export default function Page1() {
       <div className={styles.header}>
         <div className={styles.headerTitle}>宇宙xx大屏</div>
       </div>
-      <div className={styles.leftContent}>
-        <LeftContent />
-      </div>
+
+      <Left />
+      <Center />
     </div>
   );
 }
