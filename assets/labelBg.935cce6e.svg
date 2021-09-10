@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="301px" height="120px" viewBox="0 0 301 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>title</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="1.15084135%" y1="43.1216146%" x2="100%" y2="56.3330729%" id="linearGradient-1">
+            <stop stop-color="#0E51D3" offset="0%"></stop>
+            <stop stop-color="#276AEC" stop-opacity="0.1" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="g0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="g1">
+            <rect id="矩形" fill-opacity="0.2" fill="url(#linearGradient-1)" x="0" y="0" width="300" height="120"></rect>
+            <polygon id="路径1" fill="#1C4EB0" fill-rule="nonzero" points="300.063477 108 300.063477 119.866699 287 119.866699 287 117.866699 298.063 117.866 298.063477 108"></polygon>
+            <polygon id="路径2" fill="#1C4EB0" fill-rule="nonzero" transform="translate(293.531738, 6.933350) scale(1, -1) translate(-293.531738, -6.933350) " points="300.063477 1 300.063477 12.8666992 287 12.8666992 287 10.8666992 298.063 10.866 298.063477 1"></polygon>
+            <polygon id="路径3" fill="#1C4EB0" fill-rule="nonzero" transform="translate(7.531738, 113.933350) scale(-1, 1) translate(-7.531738, -113.933350) " points="14.0634766 108 14.0634766 119.866699 1 119.866699 1 117.866699 12.063 117.866 12.0634766 108"></polygon>
+            <polygon id="路径4" fill="#1C4EB0" fill-rule="nonzero" transform="translate(7.531738, 6.933350) scale(-1, -1) translate(-7.531738, -6.933350) " points="14.0634766 1 14.0634766 12.8666992 1 12.8666992 1 10.8666992 12.063 10.866 12.0634766 1"></polygon>
+        </g>
+    </g>
+</svg>
