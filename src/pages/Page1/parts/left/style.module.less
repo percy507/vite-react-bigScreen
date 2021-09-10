@@ -1,0 +1,42 @@
+.Left {
+  .list1Item {
+    display: flex;
+    align-items: center;
+    height: 36px;
+
+    & > div {
+      &:first-child {
+        width: 100px;
+      }
+    }
+  }
+
+  .list2Item {
+    color: #ecd6c7;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .block13 {
+    &__title {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    &__list {
+      display: flex;
+      justify-content: space-between;
+      &Item {
+        width: 30%;
+        height: 100px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 100px;
+        text-align: center;
+        border: 1px solid rgba(66, 211, 130, 0.2);
+      }
+    }
+  }
+}

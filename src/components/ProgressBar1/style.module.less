@@ -1,0 +1,23 @@
+.ProgressBar1 {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  padding: 6px;
+
+  .bgContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  .rectContainer {
+    height: 100%;
+    overflow: hidden;
+    transform: skewX(-20deg);
+
+    svg {
+      display: block;
+    }
+  }
+}

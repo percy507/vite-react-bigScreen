@@ -1,0 +1,114 @@
+.PrimaryCard {
+  width: 100%;
+  margin-bottom: 20px;
+  background: rgba(42, 93, 114, 0.2);
+  backdrop-filter: blur(2px);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .pcard {
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 46px;
+      background: rgba(42, 93, 114, 0.2);
+
+      &Left {
+        padding-left: 16px;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 500;
+        font-size: 26px;
+      }
+
+      &Right {
+        flex-shrink: 0;
+        width: fit-content;
+
+        .pcard__arrow {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          width: fit-content;
+          min-width: 72px;
+          height: 46px;
+          padding-left: 24px;
+
+          &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(128, 163, 199, 0.2);
+            content: '';
+            clip-path: polygon(
+              100% 0%,
+              100% 5px,
+              calc(100% - 17px) 50%,
+              100% calc(100% - 5px),
+              100% 100%,
+              22px 100%,
+              0% 50%,
+              22px 0%
+            );
+          }
+
+          &__rect {
+            position: relative;
+            z-index: 10;
+            width: 9px;
+            height: 9px;
+            margin-right: 16px;
+            background: rgba(17, 26, 38, 1);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+
+            &:last-child {
+              margin-right: 35px;
+            }
+
+            &.active {
+              background: rgba(255, 254, 254, 1);
+              box-shadow: 0 0 13px 4px rgba(104, 200, 255, 0.7);
+            }
+          }
+        }
+      }
+    }
+
+    &__content {
+      min-height: 200px;
+      background: transparent;
+    }
+  }
+
+  :global {
+    .ant-tabs {
+      color: rgba(255, 255, 255, 0.6);
+
+      & > .ant-tabs-nav {
+        margin: 0;
+
+        &::before {
+          border-color: rgba(255, 255, 255, 0.15);
+        }
+      }
+
+      &-tab {
+        margin: 0 !important;
+        padding: 16px 16px 12px;
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      &-content-holder {
+        padding: 16px;
+      }
+    }
+  }
+}

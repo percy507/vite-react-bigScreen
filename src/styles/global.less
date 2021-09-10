@@ -1,0 +1,29 @@
+@import './variables.less';
+@import './antd-rewrite.less';
+@import './scrollbar.less';
+@import './amap.less';
+
+* {
+  box-sizing: border-box; // 全局使用 border-box 盒子模型
+  // chrome://settings/fonts 修改chrome最小字号为 6px
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  background: @main-bg;
+}
+
+body {
+  width: 100%;
+  color: #333;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC',
+    'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei',
+    'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC',
+    'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
+  line-height: 1.5;
+}

@@ -1,0 +1,50 @@
+.scrollTable {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  :global {
+    .dv-scroll-board {
+      .header {
+        position: relative;
+        color: rgba(182, 224, 224, 0.8);
+        font-weight: bold;
+        font-size: 18px;
+
+        &-item {
+          background-color: #256199;
+          background-clip: padding-box;
+          border: none;
+          border-right: 4px solid transparent;
+
+          &:last-child {
+            border-right: 0 solid transparent;
+          }
+        }
+      }
+
+      .rows {
+        .row-item {
+          color: rgba(254, 255, 254, 0.8);
+          font-size: 18px;
+          border-bottom: 0;
+
+          &:hover {
+            background: #1a3c55 !important;
+          }
+
+          .ceil {
+            padding: 0 12px;
+            background: transparent;
+            border: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
