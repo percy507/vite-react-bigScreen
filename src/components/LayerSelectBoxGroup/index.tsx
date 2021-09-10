@@ -10,8 +10,12 @@ export type BaseOption = {
   iconStyle?: React.CSSProperties;
 };
 
-export type LayerSelectBoxGroupOption = BaseOption & {
-  children: BaseOption[];
+export type LayerSelectBoxGroupOption = {
+  label: string;
+  value?: number;
+  iconType?: string;
+  iconStyle?: React.CSSProperties;
+  children?: BaseOption[];
 };
 
 export type ValueModel = {

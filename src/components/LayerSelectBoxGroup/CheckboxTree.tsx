@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import IconFont from '@/components/IconFont';
 import { toAdaptedPx } from '@/utils';
 
-import type { BaseOption, LayerSelectBoxGroupOption, ValueModel } from './index';
+import type { LayerSelectBoxGroupOption, ValueModel } from './index';
 import styles from './style.module.less';
 
 const CheckboxGroup = Checkbox.Group;
@@ -23,7 +23,7 @@ export default function CheckboxTree(props: CheckboxTreeProps) {
   const [checkedList, setCheckedList] = useState<number[]>(value.checkedList);
   const [isExpand, setIsExpand] = useState<boolean>(false);
 
-  const subList = useMemo(() => item.children || [], [item]);
+  const subList = item.children || [];
   const indeterminate = useMemo(() => {
     return subList.length
       ? !!checkedList.length && checkedList.length < subList.length
@@ -50,12 +50,12 @@ export default function CheckboxTree(props: CheckboxTreeProps) {
     const val = e.target.checked
       ? subList.length
         ? subList.map((el) => el.value)
-        : [item.value]
+        : [item.value as number]
       : [];
     __onGroupChange(val);
   };
 
-  const renderCustomCheckbox = (el: BaseOption) => {
+  const renderCustomCheckbox = (el: any) => {
     return (
       <div className={styles.customCheckbox}>
         {el.iconType ? <IconFont type={el.iconType} style={el.iconStyle || {}} /> : null}
@@ -99,7 +99,7 @@ export default function CheckboxTree(props: CheckboxTreeProps) {
       paddingTop: isExpand ? toAdaptedPx(6) : 0,
       paddingBottom: isExpand ? toAdaptedPx(6) : 0,
     };
-    const reOptions = item.children.map((el) => {
+    const reOptions = subList.map((el) => {
       return {
         label: renderCustomCheckbox(el),
         value: el.value,
