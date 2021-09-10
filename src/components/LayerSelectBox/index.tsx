@@ -71,8 +71,6 @@ export default function LayerSelectBox(props: LayerSelectBoxProps) {
     }
   }, [value]);
 
-  useEffect(() => {}, [checkedList]);
-
   return (
     <div className={styles.LayerSelectBox} style={style}>
       <CheckboxGroup

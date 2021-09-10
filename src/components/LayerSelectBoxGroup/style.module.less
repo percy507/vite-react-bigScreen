@@ -1,0 +1,126 @@
+.LayerSelectBoxGroup {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  z-index: 2;
+  width: fit-content;
+  padding: 5px;
+  background: #121c2b;
+  border: 1px solid;
+  border-radius: 2px;
+  border-image: linear-gradient(
+      135deg,
+      rgba(0, 255, 252, 0.13) 0%,
+      rgba(0, 255, 252, 0.06) 100%
+    )
+    1 1;
+  box-shadow: 0 -3px 10px 0 rgba(17, 53, 83, 0.35);
+
+  :global {
+    .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+      background-color: rgba(215, 248, 255, 1);
+    }
+    .ant-checkbox-checked .ant-checkbox-inner {
+      background-color: rgba(215, 248, 255, 1);
+      border-color: rgba(215, 248, 255, 1);
+    }
+    .ant-checkbox-checked::after {
+      border-color: rgba(215, 248, 255, 1);
+    }
+    .ant-checkbox-checked .ant-checkbox-inner::after {
+      border-color: #2f3c4e;
+    }
+
+    .ant-checkbox + span {
+      padding: 0;
+    }
+  }
+}
+
+.CheckboxTree {
+  margin-bottom: 4px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .tree {
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: auto;
+      height: 40px;
+      margin: 0;
+      padding: 0 20px;
+      font-weight: bold;
+      line-height: 40px;
+      background: rgba(37, 50, 70, 0.8);
+      border-radius: 2px;
+
+      .expand_icon {
+        width: 20px;
+        height: 20px;
+        color: #fafafa;
+        font-size: 18px;
+        line-height: 20px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      :global {
+        .ant-checkbox-wrapper {
+          color: rgba(255, 255, 255, 0.5);
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 1;
+
+          &-checked {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    &__content {
+      height: 0;
+      padding-right: 10px;
+      padding-left: 40px;
+      overflow: hidden;
+      transition: height 0.2s ease;
+
+      :global {
+        .ant-checkbox-group {
+          display: flex;
+          flex-direction: column;
+
+          & > label {
+            width: fit-content;
+            height: 40px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 40px;
+
+            &.ant-checkbox-wrapper-checked {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .customCheckbox {
+    display: inline-block;
+    padding-left: 20px;
+
+    .iconfont {
+      margin-right: 8px;
+      color: transparent;
+      font-size: 20px;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  }
+}
