@@ -149,7 +149,15 @@ export default function EChart(props: EChartProps) {
 
   useEffect(() => renderChart(), [chartRef, chartOptions, pageSize]);
   useEffect(() => autoActionHandler(), [chartInstance, chartOptions]);
-  useEffect(() => () => chartInstance?.dispose(), [chartInstance]);
+  useEffect(() => {
+    return () => {
+      if (autoAction) {
+        window.clearInterval(autoActionTimer[autoAction.timerFlag]);
+      }
+
+      chartInstance?.dispose();
+    };
+  }, [chartInstance]);
 
   return (
     <div
