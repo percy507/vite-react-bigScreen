@@ -179,6 +179,22 @@ export default function Left() {
         },
       ],
     },
+    {
+      title: '卡片3',
+      children: (
+        <div
+          style={{
+            height: toAdaptedPx(220),
+            textAlign: 'center',
+            lineHeight: toAdaptedPx(220) + 'px',
+            color: '#fff',
+            fontSize: toAdaptedPx(18),
+          }}
+        >
+          占位卡片
+        </div>
+      ),
+    },
   ];
 
   return (
