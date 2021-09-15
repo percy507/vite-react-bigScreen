@@ -274,7 +274,7 @@ export default function BigMap() {
         map.add(__markerGroup as any);
       } else {
         const __markerCluster = new AMap.MarkerClusterer(map, points, {
-          clusterByZoomChange: true,
+          clusterByZoomChange: false,
           gridSize: 50,
           renderClusterMarker: (context) => setClusterCountMarker(context),
           renderMarker: (context) => setClusterFinalMarker(context),
