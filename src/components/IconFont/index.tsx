@@ -8,7 +8,7 @@ type IconFontProps = {
 
 const MyIcon = createFromIconfontCN({
   // 在 iconfont.cn 上生成
-  scriptUrl: '//at.alicdn.com/t/font_2727509_zzihoxkgp5.js',
+  scriptUrl: '//at.alicdn.com/t/font_2727509_r834k5c7k0h.js',
 });
 
 export default function IconFont(props: IconFontProps) {

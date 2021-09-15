@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
 
+import BigMap from '@/components/BigMap';
 import LayerSelectBox from '@/components/LayerSelectBox';
 import type { ValueModel } from '@/components/LayerSelectBoxGroup';
 import LayerSelectBoxGroup from '@/components/LayerSelectBoxGroup';
+import {
+  useAddMapPointGroup,
+  useCoverMapPointGroup,
+  useDeleteAllMapPointGroup,
+} from '@/hooks/map';
 import { toAdaptedPx } from '@/utils';
 
+import { randomPointGroup } from './data';
 import styles from './style.module.less';
+
+const pointMap: any = {
+  1: randomPointGroup(['red', 'icon-yixuemeirongke']),
+  2: randomPointGroup(['yellow', 'icon-a-ziyuan3']),
+  3: randomPointGroup(['green', 'icon-qiche']),
+};
 
 export default function Center() {
   const [selectedLayer, setSelectedLayer] = useState<number[]>([]);
   const [selectedGroupLayer, setSelectedGroupLayer] = useState<ValueModel>();
+
+  const addMapPointGroup = useAddMapPointGroup();
+  const coverMapPointGroup = useCoverMapPointGroup();
+  const deleteAllMapPointGroup = useDeleteAllMapPointGroup();
 
   const layerOptions = [
     {
@@ -17,17 +34,13 @@ export default function Center() {
       value: 1,
     },
     {
-      label: '图层222',
+      label: '图层2',
       value: 2,
+      iconType: 'icon-dianying',
     },
     {
       label: '图层3',
       value: 3,
-      iconType: 'icon-dianying',
-    },
-    {
-      label: '图层4',
-      value: 4,
       iconType: 'icon-dianying',
       iconStyle: {
         fontSize: toAdaptedPx(24),
@@ -90,6 +103,13 @@ export default function Center() {
   const handleLayerChange = (val: number[]) => {
     console.log(val);
     setSelectedLayer(val);
+
+    val.forEach((v, index) => {
+      if (index === 0) coverMapPointGroup(pointMap[v]);
+      else addMapPointGroup(pointMap[v]);
+    });
+
+    if (val.length === 0) deleteAllMapPointGroup();
   };
 
   const handleLayerGroupChange = (val: ValueModel) => {
@@ -99,6 +119,7 @@ export default function Center() {
 
   return (
     <div className={styles.Center}>
+      <BigMap />
       <LayerSelectBox
         options={layerOptions}
         value={selectedLayer}

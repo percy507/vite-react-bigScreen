@@ -1,0 +1,157 @@
+@icon-aspect-ratio: 340 / 470;
+
+.BigMap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+
+  #mapContainer {
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+  }
+
+  :global {
+    .amap-logo,
+    .amap-copyright {
+      display: none !important;
+    }
+
+    .amap-marker {
+      .amap-overlay-text-container {
+        padding: 0;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+      }
+    }
+
+    .amap__overlay-tooltip {
+      padding: 14px 20px;
+      color: #fff;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 34px;
+      background: linear-gradient(0deg, #0c1625 0%, #1c3d57 100%);
+      border: 1px solid;
+      border-image: linear-gradient(0deg, #2fc7ff, #fff, #73f3ff) 10 10;
+    }
+
+    .clusterCountMarker,
+    .clusterFinalMarker {
+      position: relative;
+      width: 50px;
+      height: calc(50px / (@icon-aspect-ratio));
+      background-size: 100% 100%;
+
+      &__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9;
+        width: 100%;
+      }
+
+      &__icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 10;
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        font-size: 24px;
+        line-height: 50px;
+        text-align: center;
+      }
+    }
+
+    .clusterCountMarker {
+      &__count {
+        position: absolute;
+        top: -8px;
+        right: -12px;
+        z-index: 12;
+        width: 30px;
+        height: 30px;
+        color: #fefffe;
+        font-weight: bold;
+        font-size: 16px;
+        font-style: italic;
+        line-height: 26px;
+        text-align: center;
+        border-radius: 50%;
+
+        &.count99Plus {
+          font-size: 14px;
+        }
+      }
+
+      &.bg__qing .clusterCountMarker__count {
+        background: #053d5e;
+        border: 1px solid rgba(149, 252, 234, 1);
+      }
+
+      &.bg__red .clusterCountMarker__count {
+        background: #2f1512;
+        border: 1px solid rgba(255, 129, 130, 1);
+      }
+
+      &.bg__yellow .clusterCountMarker__count {
+        background: #231e0f;
+        border: 1px solid rgba(215, 181, 110, 1);
+      }
+
+      &.bg__blue .clusterCountMarker__count {
+        background: #0f1a5e;
+        border: 1px solid rgba(66, 117, 194, 1);
+      }
+
+      &.bg__green .clusterCountMarker__count {
+        background: #0b2f33;
+        border: 1px solid rgba(106, 190, 145, 1);
+      }
+    }
+
+    .clusterFinalMarker {
+      &__extend {
+        position: absolute;
+        top: -4px;
+        left: 6px;
+        z-index: 2;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 245px;
+        height: 78px;
+        padding-right: 20px;
+        padding-left: 80px;
+        background-size: 100% 100%;
+
+        div {
+          display: flex;
+          justify-content: space-between;
+          color: #feffff;
+          font-weight: 400;
+        }
+
+        &.row__1 {
+          font-size: 22px;
+          line-height: 78px;
+        }
+
+        &.row__2 {
+          font-size: 20px;
+          line-height: 36px;
+
+          & > div:first-child {
+            border-bottom: 1px dashed transparent;
+          }
+        }
+      }
+    }
+  }
+}
