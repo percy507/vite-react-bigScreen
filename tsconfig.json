@@ -2,9 +2,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "geojson"],
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -22,6 +22,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["./src", "./*.ts"],
+  "include": ["./src", "./**/*.ts"],
   "exclude": ["node_modules"]
 }
