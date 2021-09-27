@@ -110,7 +110,7 @@ export default function BigMap() {
         autoMove: true,
         anchor: 'middle-left',
         content: point.infoWindow.render(point.infoWindow.data),
-        offset: new AMap.Pixel(toAdaptedPx(50), toAdaptedPx(0)),
+        offset: new AMap.Pixel(toAdaptedPx(30), toAdaptedPx(0)),
       });
 
       iw.open(mapInstance, point.pos, 0);
@@ -130,15 +130,18 @@ export default function BigMap() {
     };
 
     return `<div class="clusterFinalMarker">
-                <img class="clusterFinalMarker__bg" src="${bg}" />
-                <div class="clusterFinalMarker__icon iconfont ${iconClass}" style="color: ${iconColor};"></div>
-                <div
-                  class="clusterFinalMarker__extend row__${extendData.length}"
-                  style="display: ${extendBg && extendData ? 'flex' : 'none'};
-                        background-image:url(${extendBg});">
-                  ${renderExtendData(extendData)}
-                </div>
-              </div>`;
+              <img class="clusterFinalMarker__bg" src="${bg}" />
+              <div class="clusterFinalMarker__icon iconfont ${iconClass}" style="color: ${iconColor};"></div>
+              <div
+                class="clusterFinalMarker__extend row__${extendData.length}"
+                style="
+                  display: ${extendData.length ? 'flex' : 'none'};
+                  backdrop-filter: blur(8px);
+                  background-color: #39a89022;
+                  background-image:url(${extendBg});">
+                ${renderExtendData(extendData)}
+              </div>
+            </div>`;
   }, []);
 
   const bindMarkerEvent = useCallback(

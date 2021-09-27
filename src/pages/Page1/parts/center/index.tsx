@@ -11,13 +11,13 @@ import {
 } from '@/hooks/mapHooks';
 import { toAdaptedPx } from '@/utils';
 
-import { randomPointGroup } from './data';
+import { pg1, pg2, pg3 } from './data';
 import styles from './style.module.less';
 
 const pointMap: any = {
-  1: randomPointGroup(['red', 'icon-yixuemeirongke']),
-  2: randomPointGroup(['yellow', 'icon-a-ziyuan3']),
-  3: randomPointGroup(['green', 'icon-qiche']),
+  1: pg1,
+  2: pg2,
+  3: pg3,
 };
 
 export default function Center() {
