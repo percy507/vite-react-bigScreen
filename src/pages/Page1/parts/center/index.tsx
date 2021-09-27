@@ -8,7 +8,7 @@ import {
   useAddMapPointGroup,
   useCoverMapPointGroup,
   useDeleteAllMapPointGroup,
-} from '@/hooks/map';
+} from '@/hooks/mapHooks';
 import { toAdaptedPx } from '@/utils';
 
 import { randomPointGroup } from './data';
@@ -30,21 +30,19 @@ export default function Center() {
 
   const layerOptions = [
     {
-      label: '图层1',
+      label: '点位组1',
       value: 1,
+      iconType: 'icon-anquan',
     },
     {
-      label: '图层2',
+      label: '点位组2',
       value: 2,
       iconType: 'icon-dianying',
     },
     {
-      label: '图层3',
+      label: '点位组3',
       value: 3,
-      iconType: 'icon-dianying',
-      iconStyle: {
-        fontSize: toAdaptedPx(24),
-      },
+      iconType: 'icon-paizhao',
     },
   ];
 

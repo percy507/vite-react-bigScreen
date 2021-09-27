@@ -13,5 +13,5 @@ const MyIcon = createFromIconfontCN({
 
 export default function IconFont(props: IconFontProps) {
   const { type, style } = props;
-  return <MyIcon type={type} style={style} />;
+  return <MyIcon type={type} className="iconfont" style={style} />;
 }
