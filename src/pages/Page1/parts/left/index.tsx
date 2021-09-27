@@ -50,17 +50,17 @@ const Block13 = () => {
   const { countUp: value2, update: setValue2 } = useCountUp({ end: 0, separator: ',' });
   const { countUp: value3, update: setValue3 } = useCountUp({ end: 0, separator: ',' });
 
-  const changeData = () => {
-    setValue1(~~(Math.random() * 80000 + 1000));
-    setValue2(~~(Math.random() * 80000 + 1000));
-    setValue3(~~(Math.random() * 80000 + 1000));
-  };
-
   useEffect(() => {
+    const changeData = () => {
+      setValue1(~~(Math.random() * 80000 + 1000));
+      setValue2(~~(Math.random() * 80000 + 1000));
+      setValue3(~~(Math.random() * 80000 + 1000));
+    };
+
     changeData();
     const timer = setInterval(changeData, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [setValue1, setValue2, setValue3]);
 
   return (
     <div className={styles.block13}>

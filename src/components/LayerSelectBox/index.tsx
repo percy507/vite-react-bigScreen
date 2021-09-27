@@ -1,5 +1,5 @@
 import { Checkbox } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import IconFont from '@/components/IconFont';
 
@@ -37,6 +37,9 @@ export default function LayerSelectBox(props: LayerSelectBoxProps) {
   }
 
   const [checkedList, setCheckedList] = useState<number[]>(value);
+  const checkedListRef = useRef(checkedList);
+
+  checkedListRef.current = checkedList;
 
   const reOptions = options.map((el) => {
     return {
@@ -66,7 +69,7 @@ export default function LayerSelectBox(props: LayerSelectBoxProps) {
   };
 
   useEffect(() => {
-    if (value.toString() !== checkedList.toString()) {
+    if (value.toString() !== checkedListRef.current.toString()) {
       setCheckedList(value);
     }
   }, [value]);

@@ -1,5 +1,5 @@
 import { Checkbox } from 'antd';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import IconFont from '@/components/IconFont';
 import { toAdaptedPx } from '@/utils';
@@ -22,8 +22,11 @@ export default function CheckboxTree(props: CheckboxTreeProps) {
 
   const [checkedList, setCheckedList] = useState<number[]>(value.checkedList);
   const [isExpand, setIsExpand] = useState<boolean>(false);
+  const checkedListRef = useRef(checkedList);
 
-  const subList = item.children || [];
+  checkedListRef.current = checkedList;
+
+  const subList = useMemo(() => item.children || [], [item.children]);
   const indeterminate = useMemo(() => {
     return subList.length
       ? !!checkedList.length && checkedList.length < subList.length
@@ -119,7 +122,7 @@ export default function CheckboxTree(props: CheckboxTreeProps) {
 
   useEffect(() => {
     if (value.treeKey === treeKey) {
-      if (value.checkedList.toString() !== checkedList.toString()) {
+      if (value.checkedList.toString() !== checkedListRef.current.toString()) {
         setCheckedList(value.checkedList);
       }
     } else {

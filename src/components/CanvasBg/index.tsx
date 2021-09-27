@@ -21,7 +21,7 @@ export default function CanvasBg(props: CanvasBgProps) {
           break;
       }
     }
-  }, [canvasRef]);
+  }, [type]);
 
   return <canvas className={styles.CanvasBg} ref={canvasRef} />;
 }

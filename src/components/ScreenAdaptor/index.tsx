@@ -16,42 +16,42 @@ export default function ScreenAdaptor(props: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const forceUpdate: () => void = useState<any>()[1].bind(null, {});
 
-  const resizeHandler = debounce(() => {
-    const htmlEle = document.documentElement;
-    const layoutEle = containerRef.current as HTMLDivElement;
-    const screenRatio = htmlEle.clientWidth / htmlEle.clientHeight;
-    const screenRatioByDesign = uiConfig.width / uiConfig.height;
-    const isScreenRatioBigger = screenRatio > screenRatioByDesign;
-    const scale = isScreenRatioBigger ? screenRatioByDesign / screenRatio : 1;
-
-    const rootFontSize = (scale * htmlEle.clientWidth) / uiConfig.base_num;
-    const layoutWidth = isScreenRatioBigger
-      ? scale * htmlEle.clientWidth
-      : htmlEle.clientWidth;
-    const layoutHeight = isScreenRatioBigger
-      ? htmlEle.clientHeight
-      : layoutWidth / screenRatioByDesign;
-
-    if (layoutEle === null) return;
-
-    htmlEle.style.fontSize = `${rootFontSize.toFixed(3)}px`;
-    layoutEle.style.width = `${layoutWidth.toFixed(3)}px`;
-    layoutEle.style.height = `${layoutHeight.toFixed(3)}px`;
-
-    window.__adaptorWidth = layoutWidth;
-    window.__adaptorHeight = layoutHeight;
-    forceUpdate();
-  }, 300);
-
-  const initAdaptScreen = () => {
-    resizeHandler();
-    window.addEventListener('resize', resizeHandler);
-  };
-
   useEffect(() => {
+    const resizeHandler = debounce(() => {
+      const htmlEle = document.documentElement;
+      const layoutEle = containerRef.current as HTMLDivElement;
+      const screenRatio = htmlEle.clientWidth / htmlEle.clientHeight;
+      const screenRatioByDesign = uiConfig.width / uiConfig.height;
+      const isScreenRatioBigger = screenRatio > screenRatioByDesign;
+      const scale = isScreenRatioBigger ? screenRatioByDesign / screenRatio : 1;
+
+      const rootFontSize = (scale * htmlEle.clientWidth) / uiConfig.base_num;
+      const layoutWidth = isScreenRatioBigger
+        ? scale * htmlEle.clientWidth
+        : htmlEle.clientWidth;
+      const layoutHeight = isScreenRatioBigger
+        ? htmlEle.clientHeight
+        : layoutWidth / screenRatioByDesign;
+
+      if (layoutEle === null) return;
+
+      htmlEle.style.fontSize = `${rootFontSize.toFixed(3)}px`;
+      layoutEle.style.width = `${layoutWidth.toFixed(3)}px`;
+      layoutEle.style.height = `${layoutHeight.toFixed(3)}px`;
+
+      window.__adaptorWidth = layoutWidth;
+      window.__adaptorHeight = layoutHeight;
+      forceUpdate();
+    }, 300);
+
+    const initAdaptScreen = () => {
+      resizeHandler();
+      window.addEventListener('resize', resizeHandler);
+    };
+
     initAdaptScreen();
     return () => window.removeEventListener('resize', resizeHandler);
-  }, []);
+  }, [forceUpdate, uiConfig]);
 
   return (
     <div className={styles.screenAdaptor}>

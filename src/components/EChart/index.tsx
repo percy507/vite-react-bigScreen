@@ -18,7 +18,7 @@ import {
 import * as echarts from 'echarts/core';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { toAdaptedPx } from '@/utils';
 
@@ -71,7 +71,7 @@ export default function EChart(props: EChartProps) {
     }
 
     return baseOptions.merge(temp);
-  }, [baseOptions, autoAction, options]);
+  }, [autoAction, options]);
 
   if (!Array.isArray(chartOptions.series)) {
     throw new Error('EChart series must be an array');
@@ -84,7 +84,7 @@ export default function EChart(props: EChartProps) {
   const chartType = chartOptions.series[0].type;
 
   // 目前仅适用于饼图的轮播效果
-  const autoActionHandler = () => {
+  const autoActionHandler = useCallback(() => {
     if (!autoAction?.type) return;
     if (!chartInstance) return;
     if (chartType !== 'pie') return;
@@ -129,9 +129,9 @@ export default function EChart(props: EChartProps) {
         });
       }, 200);
     }, autoAction.interval);
-  };
+  }, [autoAction, chartInstance, chartOptions.series, chartType]);
 
-  const renderChart = () => {
+  const renderChart = useCallback(() => {
     if (!chartRef.current) return;
 
     let instance = chartInstance;
@@ -145,10 +145,10 @@ export default function EChart(props: EChartProps) {
     window.setTimeout(() => {
       instance?.resize();
     }, 1000); // 设置1秒的绘制延迟
-  };
+  }, [chartInstance, chartOptions]);
 
-  useEffect(() => renderChart(), [chartRef, chartOptions, pageSize]);
-  useEffect(() => autoActionHandler(), [chartInstance, chartOptions]);
+  useEffect(() => renderChart(), [renderChart, pageSize]);
+  useEffect(() => autoActionHandler(), [autoActionHandler]);
   useEffect(() => {
     return () => {
       if (autoAction) {
@@ -157,7 +157,7 @@ export default function EChart(props: EChartProps) {
 
       chartInstance?.dispose();
     };
-  }, [chartInstance]);
+  }, [chartInstance, autoAction]);
 
   return (
     <div

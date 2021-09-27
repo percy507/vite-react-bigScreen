@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import { toAdaptedPx } from '@/utils';
 import { getColorFromGradientByPercent } from '@/utils/convert';
@@ -31,7 +31,7 @@ export default function ProgressBar1(props: ProgressBar1Props) {
   const rectContainerRef = useRef<HTMLDivElement>(null);
   const width = `${ratio * 100}%`;
 
-  const renderRects = () => {
+  const renderRects = useCallback(() => {
     const rootEl = rectContainerRef.current;
 
     if (rootEl) {
@@ -62,13 +62,13 @@ export default function ProgressBar1(props: ProgressBar1Props) {
 
       rootEl.innerHTML = `<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">${rectStr}</svg>`;
     }
-  };
+  }, [rectBg]);
 
   useEffect(() => {
     if (rectContainerRef.current !== null) {
       renderRects();
     }
-  }, [rectContainerRef]);
+  }, [renderRects]);
 
   return (
     <div className={styles.ProgressBar1}>

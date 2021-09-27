@@ -1,7 +1,7 @@
 import '@amap/amap-jsapi-types';
 
 import AMapLoader from '@amap/amap-jsapi-loader';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   atomMapBlockData,
@@ -19,14 +19,69 @@ import styles from './style.module.less';
 
 export default function BigMap() {
   const [mapInstance, setMapInstance] = useState<AMap.Map>();
-  const [markerGroup, setMarkerGroup] = useState<AMap.OverlayGroup>();
-  const [markerCluster, setMarkerCluster] = useState<AMap.MarkerClusterer>();
-  const [geoJSONOverlay, setGeoJSONOverlay] = useState<AMap.GeoJSON>();
+  const markerGroupRef = useRef<AMap.OverlayGroup>();
+  const markerClusterRef = useRef<AMap.MarkerClusterer>();
+  const geoJSONOverlayRef = useRef<AMap.GeoJSON>();
 
   const markerRenderType = useRecoilValue(atomMarkerRenderType);
   const mapOptions = useRecoilValue(atomMapOptions);
   const mapBlockData = useRecoilValue(atomMapBlockData);
   const mapDataConfig = useRecoilValue(atomMapDataConfig);
+
+  const bindMapEvent = useCallback((map: AMap.Map) => {
+    map.on('click', (e) => {
+      console.log(e.lnglat.toArray());
+    });
+
+    map.on('mousemove', (e) => {
+      const currentPoint = e.lnglat.toArray();
+
+      if (!geoJSONOverlayRef.current) return;
+
+      geoJSONOverlayRef.current.eachOverlay((el: AMap.Polygon) => {
+        if (el.contains(currentPoint)) {
+          el.setOptions({
+            fillOpacity: 0.5,
+            strokeColor: '#FFF',
+            zIndex: 11,
+          });
+        } else {
+          el.setOptions({
+            fillOpacity: 0.25,
+            strokeColor: '#6798C6',
+            zIndex: 10,
+          });
+        }
+      });
+    });
+  }, []);
+
+  const initMap = useCallback(() => {
+    AMapLoader.load({
+      key: 'e1ce4157cdfb9f1b6ccee5ab457a410a',
+      version: '2.0',
+      plugins: ['AMap.GeoJSON', 'AMap.MarkerClusterer'],
+      AMapUI: undefined,
+      Loca: undefined,
+    })
+      .then(() => {
+        const AMap = window.AMap;
+        const map = new AMap.Map(styles.mapContainer, {
+          viewMode: '3D',
+          // pitch: 50,
+          zoom: mapOptions.zoom,
+          center: mapOptions.center,
+          // mapStyle: 'amap://styles/b558e2100f9c29ea830edb185d19938e',
+          features: [],
+        });
+
+        setMapInstance(map);
+        bindMapEvent(map);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [mapOptions, bindMapEvent]);
 
   const showPolygonInfoWindow = useCallback(
     (properties: any, data: any, pos: AMap.Vector2) => {
@@ -173,23 +228,26 @@ export default function BigMap() {
     [mapInstance],
   );
 
-  const setClusterFinalMarker = useCallback((context: any) => {
-    const [marker, data] = [context.marker as AMap.Marker, context.data[0] as MapPoint];
-    const content = generateMarkerContent(data);
+  const setClusterFinalMarker = useCallback(
+    (context: any) => {
+      const [marker, data] = [context.marker as AMap.Marker, context.data[0] as MapPoint];
+      const content = generateMarkerContent(data);
 
-    marker.setContent(content);
-    marker.setOffset(new AMap.Pixel(-toAdaptedPx(47.5), -toAdaptedPx(90)));
+      marker.setContent(content);
+      marker.setOffset(new AMap.Pixel(-toAdaptedPx(47.5), -toAdaptedPx(90)));
 
-    bindMarkerEvent(marker, data);
-  }, []);
+      bindMarkerEvent(marker, data);
+    },
+    [bindMarkerEvent, generateMarkerContent],
+  );
 
-  const refreshSubBoundary = () => {
+  const refreshSubBoundary = useCallback(() => {
     const map = mapInstance;
 
     if (!window.AMap || !map) return;
-    if (geoJSONOverlay) map.remove(geoJSONOverlay as any);
-    if (markerGroup) map.remove(markerGroup as any);
-    if (markerCluster) markerCluster.setMap(null);
+    if (geoJSONOverlayRef.current) map.remove(geoJSONOverlayRef.current as any);
+    if (markerGroupRef.current) map.remove(markerGroupRef.current as any);
+    if (markerClusterRef.current) markerClusterRef.current.setMap(null);
 
     const __geoJSONOverlay = new AMap.GeoJSON({
       geoJSON: geoJsonData as GeoJSON.GeoJSON,
@@ -240,7 +298,7 @@ export default function BigMap() {
       });
     });
 
-    setGeoJSONOverlay(__geoJSONOverlay);
+    geoJSONOverlayRef.current = __geoJSONOverlay;
     map.add(__geoJSONOverlay as any);
 
     if (
@@ -270,7 +328,7 @@ export default function BigMap() {
       if (markerRenderType === 'full') {
         const __markerGroup = new AMap.OverlayGroup(markers);
 
-        setMarkerGroup(__markerGroup);
+        markerGroupRef.current = __markerGroup;
         map.add(__markerGroup as any);
       } else {
         const __markerCluster = new AMap.MarkerClusterer(map, points, {
@@ -280,74 +338,24 @@ export default function BigMap() {
           renderMarker: (context) => setClusterFinalMarker(context),
         });
 
-        setMarkerCluster(__markerCluster);
+        markerClusterRef.current = __markerCluster;
       }
     }
-  };
+  }, [
+    createIconMarker,
+    mapBlockData,
+    mapDataConfig.blockClickModal,
+    mapDataConfig.blockInfoWindowRenderFunc,
+    mapDataConfig.pointGroups,
+    mapInstance,
+    markerRenderType,
+    setClusterCountMarker,
+    setClusterFinalMarker,
+    showPolygonInfoWindow,
+  ]);
 
-  const bindMapEvent = useCallback(
-    (map: AMap.Map) => {
-      map.on('click', (e) => {
-        console.log(e.lnglat.toArray());
-      });
-
-      map.on('mousemove', (e) => {
-        const currentPoint = e.lnglat.toArray();
-
-        if (!geoJSONOverlay) return;
-
-        geoJSONOverlay.eachOverlay((el: AMap.Polygon) => {
-          if (el.contains(currentPoint)) {
-            el.setOptions({
-              fillOpacity: 0.5,
-              strokeColor: '#FFF',
-            });
-          } else {
-            el.setOptions({
-              fillOpacity: 0.25,
-              strokeColor: '#6798C6',
-            });
-          }
-        });
-      });
-    },
-    [geoJSONOverlay],
-  );
-
-  const initMap = () => {
-    AMapLoader.load({
-      key: 'e1ce4157cdfb9f1b6ccee5ab457a410a',
-      version: '2.0',
-      plugins: ['AMap.GeoJSON', 'AMap.MarkerClusterer'],
-      AMapUI: undefined,
-      Loca: undefined,
-    })
-      .then(() => {
-        const AMap = window.AMap;
-        const map = new AMap.Map(styles.mapContainer, {
-          viewMode: '3D',
-          // pitch: 50,
-          zoom: mapOptions.zoom,
-          center: mapOptions.center,
-          // mapStyle: 'amap://styles/b558e2100f9c29ea830edb185d19938e',
-          features: [],
-        });
-
-        setMapInstance(map);
-        bindMapEvent(map);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  useEffect(() => {
-    initMap();
-  }, []);
-
-  useEffect(() => {
-    refreshSubBoundary();
-  }, [mapInstance, mapDataConfig, mapBlockData]);
+  useEffect(() => initMap(), [initMap]);
+  useEffect(() => refreshSubBoundary(), [refreshSubBoundary]);
 
   return (
     <div className={styles.BigMap}>
