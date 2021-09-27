@@ -1,12 +1,11 @@
-// 环境变量
-export const env = {
+export default {
   dev: {
-    BASE_API: 'https://xxx.dev.com/api',
+    BASE_API: 'http://127.0.0.1:3000/v1',
   },
   test: {
-    BASE_API: 'https://xxx.test.com/api',
+    BASE_API: 'http://127.0.0.1:3000/v1',
   },
   prod: {
-    BASE_API: 'https://xxx.prod.com/api',
+    BASE_API: 'http://127.0.0.1:3000/v1',
   },
 }[VITE_BUILD_MODE];
