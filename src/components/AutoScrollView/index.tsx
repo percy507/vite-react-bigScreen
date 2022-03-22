@@ -52,7 +52,7 @@ export default function AutoScrollView(props: AutoScrollViewProps) {
         });
       }
     }
-  }, [_stepHeight, viewHeight, mode]);
+  }, [_stepHeight, viewHeight, mode, children]);
 
   return (
     <div className={styles.AutoScrollView} style={{ height: viewHeight }}>
