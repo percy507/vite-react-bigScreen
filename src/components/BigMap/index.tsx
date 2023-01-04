@@ -3,7 +3,9 @@ import '@amap/amap-jsapi-types';
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { useAtomValue } from 'jotai';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { renderToString } from 'react-dom/server.browser';
 
+import { IconFont } from '@/components/IconFont';
 import {
   atomMapBlockData,
   atomMapDataConfig,
@@ -128,10 +130,11 @@ export function BigMap() {
         .map((l1) => `<div>${l1.map((l2) => `<span>${l2}</span>`).join('')}</div>`)
         .join('');
     };
+    const iconHtmlStr = renderToString(<IconFont type={iconClass} />);
 
     return `<div class="clusterFinalMarker">
               <img class="clusterFinalMarker__bg" src="${bg}" />
-              <div class="clusterFinalMarker__icon iconfont ${iconClass}" style="color: ${iconColor};"></div>
+              <div class="clusterFinalMarker__icon" style="color: ${iconColor};">${iconHtmlStr}</div>
               <div
                 class="clusterFinalMarker__extend row__${extendData.length}"
                 style="
@@ -209,10 +212,12 @@ export function BigMap() {
 
       const { iconBg: iconBgName, iconClass } = clusterIcon;
       const [iconBg, iconColor] = iconMap[iconBgName];
+      const iconHtmlStr = renderToString(<IconFont type={iconClass} />);
+
       const content = `
       <div class="clusterCountMarker bg__${iconBgName}">
         <img class="clusterCountMarker__bg" src="${iconBg}" />
-        <div class="clusterCountMarker__icon iconfont ${iconClass}" style="color: ${iconColor};"></div>
+        <div class="clusterCountMarker__icon" style="color: ${iconColor};">${iconHtmlStr}</div>
         <div class="clusterCountMarker__count ${count > 99 ? 'count99Plus' : ''}">
           ${count > 99 ? '99+' : count}
         </div>

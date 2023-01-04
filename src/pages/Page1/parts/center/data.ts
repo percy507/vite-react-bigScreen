@@ -10,7 +10,7 @@ export const pg1: MapPointGroup = {
     return {
       id: index.toString(),
       pos: [118.858957 + Math.random() * 1.06, 29.448859 + Math.random() * 0.9],
-      iconData: ['red', 'icon-yixuemeirongke'],
+      iconData: ['red', 'icon-hashiqi'],
       extendData: [
         ['我是谁', '额外数据'],
         ['呵呵', '😄'],
@@ -29,7 +29,7 @@ export const pg2: MapPointGroup = {
     return {
       id: index.toString(),
       pos: [118.858957 + Math.random() * 1.06, 29.448859 + Math.random() * 0.9],
-      iconData: ['yellow', 'icon-a-ziyuan3'],
+      iconData: ['yellow', 'icon-houzi'],
       infoWindow: {
         render: iw222,
         data: { key1: index, key2: `${~~(Math.random() * 10000)}吨` },
@@ -44,7 +44,7 @@ export const pg3: MapPointGroup = {
     return {
       id: index.toString(),
       pos: [118.858957 + Math.random() * 1.06, 29.448859 + Math.random() * 0.9],
-      iconData: ['green', 'icon-qiche'],
+      iconData: ['green', 'icon-maotouying'],
       infoWindow: {
         render: iw333,
         data: { key1: index, key2: `${~~(Math.random() * 10000)}$` },

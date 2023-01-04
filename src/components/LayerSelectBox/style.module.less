@@ -16,18 +16,21 @@
   box-shadow: 0 -3px 10px 0 rgba(17, 53, 83, 0.35);
 
   .customCheckbox {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding-left: 20px;
+
+    :global {
+      .anticon {
+        margin-right: 6px;
+        font-size: 20px;
+      }
+    }
   }
 
   :global {
-    .iconfont {
-      margin-right: 8px;
-      color: transparent;
-      font-size: 20px;
-      vertical-align: middle;
-      -webkit-background-clip: text;
-      background-clip: text;
+    .ant-checkbox {
+      top: 0;
     }
 
     .ant-checkbox-group {
@@ -37,7 +40,7 @@
       & > label {
         width: auto;
         height: 40px;
-        margin: 0 0 4px 0;
+        margin: 0 0 4px;
         padding: 0 20px;
         color: rgba(255, 255, 255, 0.5);
         font-weight: 500;
@@ -59,13 +62,16 @@
     .ant-checkbox-indeterminate .ant-checkbox-inner::after {
       background-color: rgba(147, 98, 41, 1);
     }
+
     .ant-checkbox-checked .ant-checkbox-inner {
       background-color: rgba(147, 98, 41, 1);
       border-color: rgba(147, 98, 41, 1);
     }
+
     .ant-checkbox-checked::after {
       border-color: rgba(147, 98, 41, 1);
     }
+
     .ant-checkbox-checked .ant-checkbox-inner::after {
       border-color: #fff;
     }

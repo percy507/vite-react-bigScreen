@@ -41,7 +41,7 @@ export default class ErrorBoundary extends React.PureComponent<
     if (this.state.hasError) {
       return (
         <div className={styles.errorBoundary}>
-          <IconFont type="icon-caogaoxiang" />
+          <IconFont type="icon-error" />
           <div>加载出错,请刷新页面</div>
         </div>
       );

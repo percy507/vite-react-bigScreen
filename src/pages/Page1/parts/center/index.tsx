@@ -32,17 +32,17 @@ export default function Center() {
     {
       label: '点位组1',
       value: 1,
-      iconType: 'icon-anquan',
+      iconType: 'icon-hashiqi',
     },
     {
       label: '点位组2',
       value: 2,
-      iconType: 'icon-dianying',
+      iconType: 'icon-houzi',
     },
     {
       label: '点位组3',
       value: 3,
-      iconType: 'icon-paizhao',
+      iconType: 'icon-maotouying',
     },
   ];
 
@@ -53,45 +53,45 @@ export default function Center() {
         {
           label: '图层11',
           value: 1.1,
-          iconType: 'icon-dianying',
+          iconType: 'icon-pangxie',
         },
         {
           label: '图层12',
           value: 1.2,
-          iconType: 'icon-dianying',
+          iconType: 'icon-pangxie',
         },
         {
           label: '图层13',
           value: 1.3,
-          iconType: 'icon-dianying',
+          iconType: 'icon-pangxie',
         },
       ],
     },
     {
       label: '图层组2',
-      iconType: 'icon-dianying',
+      iconType: 'icon-pangxie',
       children: [
         {
           label: '图层21',
           value: 2.1,
-          iconType: 'icon-dianying',
+          iconType: 'icon-pangxie',
         },
         {
           label: '图层22',
           value: 2.2,
-          iconType: 'icon-dianying',
+          iconType: 'icon-pangxie',
         },
         {
           label: '图层23',
           value: 2.3,
-          iconType: 'icon-dianying',
+          iconType: 'icon-pangxie',
         },
       ],
     },
     {
       label: '图层3',
       value: 3,
-      iconType: 'icon-dianying',
+      iconType: 'icon-pangxie',
       iconStyle: {
         fontSize: toAdaptedPx(24),
       },
