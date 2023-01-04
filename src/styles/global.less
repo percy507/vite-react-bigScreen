@@ -2,12 +2,8 @@
 @import './scrollbar.less';
 @import './amap.less';
 
-:root {
-  --main-bg: rgba(49, 49, 49, 1);
-}
-
 * {
-  box-sizing: border-box; // 全局使用 border-box 盒子模型
+  box-sizing: border-box;
 }
 
 html,
@@ -15,7 +11,7 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  background: var(--main-bg);
+  background: #000;
 }
 
 body {
@@ -28,4 +24,43 @@ body {
     'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC',
     'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.5;
+}
+
+@font-face {
+  font-family: 'custom_font__title';
+  src: url('../assets/fonts/PangMenZhengDaoBiaoTiTi-1.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'custom_font__number';
+  src: url('../assets/fonts/DIN-BoldItalic.otf') format('truetype');
+}
+
+.chart-tooltip1 {
+  color: #fff !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  background: rgba(5, 44, 102, 0.9) !important;
+  border: none !important;
+  border-radius: 2px !important;
+  box-shadow: inset 0 0 20px rgba(0, 133, 255, 0.9) !important;
+
+  [role='item'] {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    [role='dot'] {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 8px;
+      border-radius: 1px;
+    }
+  }
 }

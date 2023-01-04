@@ -1,7 +1,7 @@
 import { CanvasBg } from '@/components/CanvasBg';
 
-import Center from './parts/center';
-import Left from './parts/left';
+import Center from './center';
+import Left from './left';
 import styles from './style.module.less';
 
 export default function Page1() {

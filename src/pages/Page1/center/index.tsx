@@ -4,14 +4,14 @@ import { BigMap } from '@/components/BigMap';
 import { LayerSelectBox } from '@/components/LayerSelectBox';
 import type { ValueModel } from '@/components/LayerSelectBoxGroup';
 import { LayerSelectBoxGroup } from '@/components/LayerSelectBoxGroup';
+import { toAdaptedPx } from '@/utils';
+
+import { pg1, pg2, pg3 } from './data';
 import {
   useAddMapPointGroup,
   useCoverMapPointGroup,
   useDeleteAllMapPointGroup,
-} from '@/hooks/mapHooks';
-import { toAdaptedPx } from '@/utils';
-
-import { pg1, pg2, pg3 } from './data';
+} from './mapHooks';
 import styles from './style.module.less';
 
 const pointMap: any = {

@@ -11,7 +11,7 @@ import {
   atomMapDataConfig,
   atomMapOptions,
   atomMarkerRenderType,
-} from '@/store/app';
+} from '@/store/page1';
 import { toAdaptedPx } from '@/utils/index';
 
 import type { IconBg, MapPoint } from './@types/mapData';

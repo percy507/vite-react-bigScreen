@@ -6,10 +6,10 @@ export default function HomePage() {
   return (
     <div className={styles.HomePage}>
       <div>
-        <Link to="/p1">页面1</Link>
+        <Link to="/p1">大屏1（高德地图）</Link>
       </div>
       <div>
-        <Link to="/p2">页面2</Link>
+        <Link to="/p2">大屏2（echarts 3d地图）</Link>
       </div>
     </div>
   );

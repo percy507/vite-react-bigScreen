@@ -7,7 +7,7 @@ import {
   atomMapDataConfig,
   atomMapOptions,
   atomMarkerRenderType,
-} from '@/store/app';
+} from '@/store/page1';
 
 /**
  * Well, when update recoil state with a little complex logic, we use custom hooks
