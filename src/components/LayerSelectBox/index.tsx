@@ -1,29 +1,29 @@
 import { Checkbox } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 
-import IconFont from '@/components/IconFont';
+import { IconFont } from '@/components/IconFont';
 
 import styles from './style.module.less';
 
 const CheckboxGroup = Checkbox.Group;
 
-type LayerSelectBoxOption = {
+interface LayerSelectBoxOption {
   label: string;
   value: number;
   iconType?: string;
   iconStyle?: React.CSSProperties;
-};
+}
 
-type LayerSelectBoxProps = {
+interface LayerSelectBoxProps {
   /** 是否是单选模式, 默认多选模式 */
   singleMode?: boolean;
   options: LayerSelectBoxOption[];
   value?: number[];
   onChange?: (val: number[]) => void;
   style?: React.CSSProperties;
-};
+}
 
-export default function LayerSelectBox(props: LayerSelectBoxProps) {
+export function LayerSelectBox(props: LayerSelectBoxProps) {
   const {
     singleMode = false,
     options,

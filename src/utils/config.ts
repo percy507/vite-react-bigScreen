@@ -1,4 +1,7 @@
 export default {
+  local: {
+    BASE_API: 'http://127.0.0.1:3000/v1',
+  },
   dev: {
     BASE_API: 'http://127.0.0.1:3000/v1',
   },
@@ -8,4 +11,4 @@ export default {
   prod: {
     BASE_API: 'http://127.0.0.1:3000/v1',
   },
-}[VITE_BUILD_MODE];
+}[VITE_MODE];

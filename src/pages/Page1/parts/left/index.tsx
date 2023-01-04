@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCountUp } from 'react-countup';
 
-import AutoScrollView from '@/components/AutoScrollView';
-import EChart from '@/components/EChart';
+import { AutoScrollView } from '@/components/AutoScrollView';
+import { Empty } from '@/components/Empty';
 import type { PrimaryCardProps } from '@/components/PrimaryCard';
-import PrimaryCard from '@/components/PrimaryCard';
-import ProgressBar1 from '@/components/ProgressBar1';
-import ScrollTable from '@/components/ScrollTable';
+import { PrimaryCard } from '@/components/PrimaryCard';
+import { ProgressBar1 } from '@/components/ProgressBar1';
+import { ScrollTable } from '@/components/ScrollTable';
+import { SuperEChart } from '@/components/SuperEChart';
 import { toAdaptedPx } from '@/utils';
 
 import { getCarouselChart, getComplexChart, getSimpleChart, list1, list2 } from './data';
@@ -76,7 +77,11 @@ const Block13 = () => {
 
 const Block14 = () => {
   const tableConfig = {
-    headerBGC: 'rgba(111,233,111,0.1)',
+    waitTime: 1000,
+    hoverPause: true,
+    headerBGC: '#1B3A67aa',
+    oddRowBGC: 'transparent',
+    evenRowBGC: 'transparent',
     header: ['公司名称', '地址', '资本'],
     columnWidth: [toAdaptedPx(180), toAdaptedPx(140)],
     data: new Array(12).fill(0).map(() => {
@@ -103,7 +108,7 @@ const Block21 = () => {
     return () => clearInterval(timer);
   }, []);
 
-  return <EChart height={200} options={getSimpleChart(data)} />;
+  return <SuperEChart height={200} options={getSimpleChart(data)} />;
 };
 
 const Block22 = () => {
@@ -122,14 +127,15 @@ const Block22 = () => {
     return () => clearInterval(timer);
   }, []);
 
-  return <EChart height={200} options={getComplexChart(data)} />;
+  return <SuperEChart height={200} options={getComplexChart(data)} />;
 };
 
 const Block23 = () => {
   return (
-    <EChart
+    <SuperEChart
       height={200}
       options={getCarouselChart()}
+      mergeOptions
       autoAction={{
         type: 'highlight',
         interval: 2000,
@@ -189,9 +195,8 @@ export default function Left() {
             lineHeight: toAdaptedPx(220) + 'px',
             color: '#fff',
             fontSize: toAdaptedPx(18),
-          }}
-        >
-          占位卡片
+          }}>
+          <Empty />
         </div>
       ),
     },

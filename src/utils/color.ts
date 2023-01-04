@@ -11,25 +11,25 @@
  * @param {number} [decimalPrecision=2]
  * @return {*}  {number}
  */
-export function toFixedNum(num: number, decimalPrecision: number = 2): number {
+function toFixedNum(num: number, decimalPrecision: number = 2): number {
   const temp = Number(`1e${decimalPrecision}`);
   return Math.round(num * temp) / temp;
 }
 
 /** check if the `hex` color string is valid */
-export function isValidHexColor(hex: string): boolean {
+function isValidHexColor(hex: string): boolean {
   return /^([a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$/i.test(hex);
 }
 
 /** check if the `rgb` color string is valid */
-export function isValidRGBColor(rgb: string): boolean {
+function isValidRGBColor(rgb: string): boolean {
   return /^rgb\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d)\)$/i.test(
     rgb,
   );
 }
 
 /** check if the `rgba` color string is valid */
-export function isValidRGBAColor(rgba: string): boolean {
+function isValidRGBAColor(rgba: string): boolean {
   return /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|0?\.\d+|1(\.0)?)\)$/i.test(
     rgba,
   );

@@ -11,7 +11,9 @@ declare module '*.less';
 
 declare module '@jiaminghi/data-view-react';
 declare module 'postcss-pxtorem';
-declare module 'less-vars-to-js';
+
+declare module 'echarts-gl/charts';
+declare module 'echarts-gl/components';
 
 interface Window {
   __adaptorWidth: number;
@@ -19,7 +21,7 @@ interface Window {
 }
 
 /** vite 打包环境变量 */
-declare const VITE_BUILD_MODE: 'dev' | 'test' | 'prod';
+declare const VITE_MODE: 'local' | 'dev' | 'test' | 'prod';
 
 interface UIConfig {
   width: number; // UI稿宽度

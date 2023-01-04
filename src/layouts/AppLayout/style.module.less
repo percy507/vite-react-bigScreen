@@ -1,0 +1,152 @@
+@headerHeight: 56px;
+
+.appMainLayout {
+  width: 100%;
+  height: 100%;
+
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    & > div {
+      margin-top: 16px;
+    }
+  }
+
+  .header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: @headerHeight;
+    padding: 0;
+    line-height: @headerHeight;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    &Left {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .logo {
+        display: flex;
+        align-items: center;
+        min-width: 280px;
+        padding: 0 24px;
+        color: #333;
+        font-weight: bold;
+        font-size: 18px;
+
+        img {
+          width: 30px;
+          margin-right: 16px;
+        }
+      }
+
+      .menus {
+        width: 600px;
+        height: 100%;
+        border: none;
+
+        & > li {
+          top: 0;
+          height: 100%;
+          margin: 0;
+        }
+
+        &:global(.ant-menu-horizontal > .ant-menu-item a::before) {
+          bottom: 0;
+        }
+      }
+    }
+
+    &Right {
+      display: flex;
+      align-items: center;
+      padding-right: 24px;
+
+      .userInfo {
+        display: flex;
+        align-items: center;
+        margin-left: 24px;
+      }
+
+      .userName {
+        margin-left: 10px;
+        color: #333;
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: calc(100% - @headerHeight);
+    overflow: hidden;
+  }
+}
+
+.noticeIcon {
+  svg {
+    color: #484848;
+    font-size: 18px;
+  }
+
+  :global {
+    .ant-badge-count {
+      transform: scale(0.85) translate(50%, -50%);
+    }
+  }
+}
+
+.noticePopover {
+  :global {
+    .ant-popover-inner-content {
+      padding: 0;
+    }
+  }
+}
+
+.noticeList {
+  width: 350px;
+  padding-top: 12px;
+
+  .noticeItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 16px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+
+    & > div:first-child {
+      width: 175px;
+    }
+
+    & > div:last-child {
+      color: rgba(0, 0, 0, 0.65);
+      font-size: 12px;
+    }
+  }
+
+  .noticeMore {
+    display: block;
+    margin-top: 12px;
+    padding: 6px 0;
+    color: #2153d3;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    background: #fafafa;
+  }
+}

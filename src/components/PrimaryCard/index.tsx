@@ -1,19 +1,20 @@
 import type { TabPaneProps } from 'antd';
 import { Tabs } from 'antd';
-import React, { useState } from 'react';
+import clsx from 'clsx';
+import { useState } from 'react';
 
 import styles from './style.module.less';
 
-export type PrimaryCardProps = {
+export interface PrimaryCardProps extends React.ComponentPropsWithRef<'div'> {
   title: string;
   tabs?: TabPaneProps[];
   children?: React.ReactNode;
-};
+}
 
 const { TabPane } = Tabs;
 
-export default function PrimaryCard(props: PrimaryCardProps) {
-  const { title, tabs = [], children = null } = props;
+export function PrimaryCard(props: PrimaryCardProps) {
+  const { title, tabs = [], children = null, className, ...restProps } = props;
   const hasTabs = tabs.length > 0;
 
   const [currentTab, setCurrentTab] = useState<number>(0);
@@ -23,7 +24,7 @@ export default function PrimaryCard(props: PrimaryCardProps) {
   };
 
   return (
-    <div className={styles.PrimaryCard}>
+    <div className={clsx(styles.PrimaryCard, className)} {...restProps}>
       <div className={styles.pcard__header}>
         <div className={styles.pcard__headerLeft}>{title}</div>
         <div className={styles.pcard__headerRight}>

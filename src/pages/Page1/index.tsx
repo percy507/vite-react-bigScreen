@@ -1,6 +1,4 @@
-import React from 'react';
-
-import CanvasBg from '@/components/CanvasBg';
+import { CanvasBg } from '@/components/CanvasBg';
 
 import Center from './parts/center';
 import Left from './parts/left';

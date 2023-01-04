@@ -3,15 +3,16 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './style.module.less';
 
-type Props = {
-  uiConfig: UIConfig; // 设计稿参数
-  children: React.ReactNode; // children
-};
+interface ScreenAdaptorProps {
+  /** 设计稿参数 */
+  uiConfig: UIConfig;
+  children: React.ReactNode;
+}
 
 // 锁定UI稿比例，以便适配屏幕
 // 动态计算html元素的font-size
 // 动态设置内容容器的width和height
-export default function ScreenAdaptor(props: Props) {
+export function ScreenAdaptor(props: ScreenAdaptorProps) {
   const { uiConfig, children } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const forceUpdate: () => void = useState<any>()[1].bind(null, {});

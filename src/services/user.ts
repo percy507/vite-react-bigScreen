@@ -1,8 +1,7 @@
-import request from '@/utils/request';
+// import request from '@/utils/request';
 
 export function requestUserInfo() {
-  request.get('/userInfo');
-  return new Promise((resolve) => {
+  return new Promise<any>((resolve) => {
     setTimeout(() => {
       resolve({});
     }, 2000);

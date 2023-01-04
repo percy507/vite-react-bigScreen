@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconFont from '@/components/IconFont';
+import { IconFont } from '@/components/IconFont';
 
 import styles from './style.module.less';
 

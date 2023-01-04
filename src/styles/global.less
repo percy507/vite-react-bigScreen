@@ -1,11 +1,13 @@
-@import './variables.less';
 @import './antd-rewrite.less';
 @import './scrollbar.less';
 @import './amap.less';
 
+:root {
+  --main-bg: rgba(49, 49, 49, 1);
+}
+
 * {
   box-sizing: border-box; // 全局使用 border-box 盒子模型
-  // chrome://settings/fonts 修改chrome最小字号为 6px
 }
 
 html,
@@ -13,7 +15,7 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  background: @main-bg;
+  background: var(--main-bg);
 }
 
 body {

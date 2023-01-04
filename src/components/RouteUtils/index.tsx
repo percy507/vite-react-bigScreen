@@ -1,0 +1,61 @@
+import { Spin } from 'antd';
+import { Suspense, useLayoutEffect } from 'react';
+import type { RouteObject } from 'react-router-dom';
+import { Navigate, useLocation, useRoutes } from 'react-router-dom';
+
+/**
+ * 用单独的组件容纳 useRoutes 返回的内容。因为 useRoutes 会随着路由的变动而触发
+ * 当前组件重新渲染，这样做可以最小化减少重新渲染的内容。
+ */
+export function RouteTree({ data }: { data: RouteObject[] }) {
+  return useRoutes(data);
+}
+
+/** 空组件，用来监听路由变动并执行相关逻辑 */
+export function RouteListener({ onChange }: { onChange?: () => void } = {}) {
+  const location = useLocation();
+  useLayoutEffect(() => {
+    if (onChange) onChange();
+  }, [location, onChange]);
+  return <></>;
+}
+
+interface LazyRouteProps {
+  auth?: string | string[];
+  lazy: React.LazyExoticComponent<() => JSX.Element>;
+}
+
+export function LazyRoute(props: LazyRouteProps) {
+  const { lazy: LazyComponent } = props;
+
+  return (
+    <Suspense
+      fallback={
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Spin spinning />
+        </div>
+      }>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+
+/** Return a Navigate component for redirect. */
+export const navigateTo = (path: string, replace: boolean = true) => {
+  return <Navigate to={path} replace={replace} />;
+};
+
+/**
+ * A wrapper for using LazyRoute component.
+ * - `lr` means `lazy route`
+ */
+export const lr = (lazy: LazyRouteProps['lazy'], auth?: LazyRouteProps['auth']) => (
+  <LazyRoute lazy={lazy} auth={auth} />
+);

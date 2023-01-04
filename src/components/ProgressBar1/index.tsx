@@ -1,22 +1,22 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { toAdaptedPx } from '@/utils';
-import { getColorFromGradientByPercent } from '@/utils/convert';
+import { getColorFromGradientByPercent } from '@/utils/color';
 
 import styles from './style.module.less';
 
-type LinearGradientColor = {
+interface LinearGradientColor {
   startColor: string;
   endColor: string;
-};
+}
 
-export type ProgressBar1Props = {
+export interface ProgressBar1Props {
   ratio?: number;
   mainBg?: LinearGradientColor;
   rectBg?: LinearGradientColor;
-};
+}
 
-export default function ProgressBar1(props: ProgressBar1Props) {
+export function ProgressBar1(props: ProgressBar1Props) {
   const {
     ratio = 0.5,
     mainBg = {
@@ -77,13 +77,11 @@ export default function ProgressBar1(props: ProgressBar1Props) {
         style={{
           width,
           background: `linear-gradient(90deg, ${mainBg.startColor} 0%, ${mainBg.endColor} 100%)`,
-        }}
-      ></div>
+        }}></div>
       <div
         className={styles.rectContainer}
         style={{ width }}
-        ref={rectContainerRef}
-      ></div>
+        ref={rectContainerRef}></div>
     </div>
   );
 }

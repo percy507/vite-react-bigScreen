@@ -6,3 +6,6 @@ dist-ssr
 
 yarn.lock
 package-lock.json
+.*.log
+
+public/build.json

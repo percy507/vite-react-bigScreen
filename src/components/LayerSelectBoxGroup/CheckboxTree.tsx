@@ -1,7 +1,7 @@
 import { Checkbox } from 'antd';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-import IconFont from '@/components/IconFont';
+import { IconFont } from '@/components/IconFont';
 import { toAdaptedPx } from '@/utils';
 
 import type { LayerSelectBoxGroupOption, ValueModel } from './index';
@@ -73,8 +73,7 @@ export default function CheckboxTree(props: CheckboxTreeProps) {
         <Checkbox
           indeterminate={indeterminate}
           onChange={__onCheckAllChange}
-          checked={checkAll}
-        >
+          checked={checkAll}>
           {renderCustomCheckbox(item)}
         </Checkbox>
 

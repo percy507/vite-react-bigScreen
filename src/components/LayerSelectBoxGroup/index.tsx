@@ -3,36 +3,36 @@ import React from 'react';
 import CheckboxTree from './CheckboxTree';
 import styles from './style.module.less';
 
-export type BaseOption = {
+export interface BaseOption {
   label: string;
   value: number;
   iconType?: string;
   iconStyle?: React.CSSProperties;
-};
+}
 
-export type LayerSelectBoxGroupOption = {
+export interface LayerSelectBoxGroupOption {
   label: string;
   value?: number;
   iconType?: string;
   iconStyle?: React.CSSProperties;
   children?: BaseOption[];
-};
+}
 
-export type ValueModel = {
+export interface ValueModel {
   treeKey: number;
   checkedList: number[];
-};
+}
 
-type LayerSelectBoxGroupProps = {
+interface LayerSelectBoxGroupProps {
   /** 子列表是否是单选模式, 默认多选模式 */
   singleMode?: boolean;
   options: LayerSelectBoxGroupOption[];
   value?: ValueModel;
   onChange?: (val: ValueModel) => void;
   style?: React.CSSProperties;
-};
+}
 
-export default function LayerSelectBoxGroup(props: LayerSelectBoxGroupProps) {
+export function LayerSelectBoxGroup(props: LayerSelectBoxGroupProps) {
   const {
     singleMode = false,
     options,

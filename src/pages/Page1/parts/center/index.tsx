@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import BigMap from '@/components/BigMap';
-import LayerSelectBox from '@/components/LayerSelectBox';
+import { BigMap } from '@/components/BigMap';
+import { LayerSelectBox } from '@/components/LayerSelectBox';
 import type { ValueModel } from '@/components/LayerSelectBoxGroup';
-import LayerSelectBoxGroup from '@/components/LayerSelectBoxGroup';
+import { LayerSelectBoxGroup } from '@/components/LayerSelectBoxGroup';
 import {
   useAddMapPointGroup,
   useCoverMapPointGroup,

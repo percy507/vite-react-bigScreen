@@ -1,15 +1,15 @@
 import '@amap/amap-jsapi-types';
 
 import AMapLoader from '@amap/amap-jsapi-loader';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useAtomValue } from 'jotai';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   atomMapBlockData,
   atomMapDataConfig,
   atomMapOptions,
   atomMarkerRenderType,
-  useRecoilValue,
-} from '@/recoil/map';
+} from '@/store/app';
 import { toAdaptedPx } from '@/utils/index';
 
 import type { IconBg, MapPoint } from './@types/mapData';
@@ -17,16 +17,16 @@ import geoJsonData from './geojson/hang_zhou.json';
 import iconMap from './mapIcon';
 import styles from './style.module.less';
 
-export default function BigMap() {
+export function BigMap() {
   const [mapInstance, setMapInstance] = useState<AMap.Map>();
   const markerGroupRef = useRef<AMap.OverlayGroup>();
   const markerClusterRef = useRef<AMap.MarkerClusterer>();
   const geoJSONOverlayRef = useRef<AMap.GeoJSON>();
 
-  const markerRenderType = useRecoilValue(atomMarkerRenderType);
-  const mapOptions = useRecoilValue(atomMapOptions);
-  const mapBlockData = useRecoilValue(atomMapBlockData);
-  const mapDataConfig = useRecoilValue(atomMapDataConfig);
+  const markerRenderType = useAtomValue(atomMarkerRenderType);
+  const mapOptions = useAtomValue(atomMapOptions);
+  const mapBlockData = useAtomValue(atomMapBlockData);
+  const mapDataConfig = useAtomValue(atomMapDataConfig);
 
   const bindMapEvent = useCallback((map: AMap.Map) => {
     map.on('click', (e) => {

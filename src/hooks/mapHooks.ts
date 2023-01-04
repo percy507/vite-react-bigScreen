@@ -1,12 +1,13 @@
+import { useSetAtom } from 'jotai';
+import { useResetAtom } from 'jotai/utils';
+
 import type { MapPointGroup } from '@/components/BigMap/@types/mapData';
 import {
   atomMapBlockData,
   atomMapDataConfig,
   atomMapOptions,
   atomMarkerRenderType,
-  useResetRecoilState,
-  useSetRecoilState,
-} from '@/recoil/map';
+} from '@/store/app';
 
 /**
  * Well, when update recoil state with a little complex logic, we use custom hooks
@@ -14,10 +15,10 @@ import {
 
 /** reset all map state */
 export function useResetAllMapState() {
-  const resetMapOptions = useResetRecoilState(atomMapOptions);
-  const resetMarkerRenderType = useResetRecoilState(atomMarkerRenderType);
-  const resetMapBlockData = useResetRecoilState(atomMapBlockData);
-  const resetMapDataConfig = useResetRecoilState(atomMapDataConfig);
+  const resetMapOptions = useResetAtom(atomMapOptions);
+  const resetMarkerRenderType = useResetAtom(atomMarkerRenderType);
+  const resetMapBlockData = useResetAtom(atomMapBlockData);
+  const resetMapDataConfig = useResetAtom(atomMapDataConfig);
 
   return () => {
     resetMapOptions();
@@ -29,7 +30,7 @@ export function useResetAllMapState() {
 
 /** 以追加的形式向地图添加一个打点群组 */
 export function useAddMapPointGroup() {
-  const setMapDataConfig = useSetRecoilState(atomMapDataConfig);
+  const setMapDataConfig = useSetAtom(atomMapDataConfig);
 
   return (payload: MapPointGroup) => {
     setMapDataConfig((currVal) => {
@@ -44,7 +45,7 @@ export function useAddMapPointGroup() {
 
 /** 清除原有的所有群组，然后向地图添加一个打点群组 */
 export function useCoverMapPointGroup() {
-  const setMapDataConfig = useSetRecoilState(atomMapDataConfig);
+  const setMapDataConfig = useSetAtom(atomMapDataConfig);
 
   return (payload: MapPointGroup) => {
     setMapDataConfig((currVal) => {
@@ -58,7 +59,7 @@ export function useCoverMapPointGroup() {
 
 /** 从地图中删除指定的一个打点群组 */
 export function useDeleteMapPointGroup() {
-  const setMapDataConfig = useSetRecoilState(atomMapDataConfig);
+  const setMapDataConfig = useSetAtom(atomMapDataConfig);
 
   return (payload: MapPointGroup) => {
     setMapDataConfig((currVal) => {
@@ -73,7 +74,7 @@ export function useDeleteMapPointGroup() {
 
 /** 从地图中删除所有的打点群组 */
 export function useDeleteAllMapPointGroup() {
-  const setMapDataConfig = useSetRecoilState(atomMapDataConfig);
+  const setMapDataConfig = useSetAtom(atomMapDataConfig);
 
   return () => {
     setMapDataConfig((currVal) => {

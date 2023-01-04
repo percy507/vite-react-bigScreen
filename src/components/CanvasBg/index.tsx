@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
+import makeUniverse from './kinds/universe';
 import styles from './style.module.less';
-import makeUniverse from './types/universe';
 
-type CanvasBgProps = {
+interface CanvasBgProps {
   type: 'universe';
-};
+}
 
-export default function CanvasBg(props: CanvasBgProps) {
+export function CanvasBg(props: CanvasBgProps) {
   const { type = 'universe' } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

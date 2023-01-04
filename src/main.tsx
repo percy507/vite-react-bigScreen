@@ -1,18 +1,30 @@
 import 'normalize.css'; // A modern alternative to CSS resets
+import 'moment/dist/locale/zh-cn';
 import './styles/global.less';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
+import { Provider } from 'jotai';
+import moment from 'moment';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
+import AppLayout from '@/layouts/AppLayout';
 
-import App from './App';
+moment.locale('zh-cn');
 
-ReactDOM.render(
-  <React.StrictMode>
+// rewrite the transition data
+zhCN.DatePicker!.lang.rangePlaceholder = ['开始时间', '结束时间'];
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <ConfigProvider locale={zhCN}>
     <ErrorBoundary>
-      <App />
+      <Provider>
+        <BrowserRouter>
+          <AppLayout />
+        </BrowserRouter>
+      </Provider>
     </ErrorBoundary>
-  </React.StrictMode>,
-  document.getElementById('root'),
+  </ConfigProvider>,
 );

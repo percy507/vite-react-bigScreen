@@ -1,19 +1,31 @@
 import anime from 'animejs';
+import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 
 import { toAdaptedPx } from '@/utils';
 
 import styles from './style.module.less';
 
-type AutoScrollViewProps = {
-  mode?: 'full' | 'step'; // 滚动模式
-  height: number; // 滚动容器的高度
-  stepHeight?: number; // mode 为 step 时，stepHeight为每次滚动的高度
+interface AutoScrollViewProps extends React.ComponentPropsWithRef<'div'> {
+  /** 滚动模式 */
+  mode?: 'full' | 'step';
+  /** 滚动容器的高度 */
+  height: number;
+  /** mode 为 step 时，stepHeight为每次滚动的高度 */
+  stepHeight?: number;
   children: React.ReactNode;
-};
+}
 
-export default function AutoScrollView(props: AutoScrollViewProps) {
-  const { mode = 'full', height, stepHeight = 40, children } = props;
+export function AutoScrollView(props: AutoScrollViewProps) {
+  const {
+    mode = 'full',
+    height,
+    stepHeight = 40,
+    children,
+    className,
+    style,
+    ...restProps
+  } = props;
 
   const viewHeight = toAdaptedPx(height);
   const _stepHeight = toAdaptedPx(stepHeight);
@@ -55,7 +67,10 @@ export default function AutoScrollView(props: AutoScrollViewProps) {
   }, [_stepHeight, viewHeight, mode, children]);
 
   return (
-    <div className={styles.AutoScrollView} style={{ height: viewHeight }}>
+    <div
+      className={clsx(styles.AutoScrollView, className)}
+      style={{ ...style, height: viewHeight }}
+      {...restProps}>
       <div className={styles.asv__container} ref={containerRef}>
         {children}
       </div>

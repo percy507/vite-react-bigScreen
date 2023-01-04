@@ -2,15 +2,15 @@ import { cloneDeep, merge } from 'lodash';
 
 import { toAdaptedPx } from '@/utils/index';
 
-import type { ECOption } from './type';
+import type { ECOption } from './index';
 
 // 直角坐标系样式
 const getAxisStyle = () => {
   const axisStyle = {
     // 坐标轴名称
     nameTextStyle: {
-      color: 'rgba(255,255,255,0.6)',
-      fontSize: toAdaptedPx(16),
+      color: 'rgba(255,255,255,0.65)',
+      fontSize: toAdaptedPx(12),
     },
     // 坐标轴轴线
     axisLine: {
@@ -21,17 +21,15 @@ const getAxisStyle = () => {
     },
     // 坐标轴刻度标签
     axisLabel: {
-      color: 'rgba(240, 245, 247, 0.8)',
+      color: 'rgba(255,255,255,0.65)',
       margin: toAdaptedPx(8),
-      fontSize: toAdaptedPx(18),
-      lineHeight: toAdaptedPx(18),
+      fontSize: toAdaptedPx(12),
+      lineHeight: toAdaptedPx(14),
     },
     // 坐标轴在 grid 区域中的分隔线
     splitLine: {
       show: false,
-      lineStyle: {
-        color: ['rgba(132, 201, 255, 0.2)'],
-      },
+      lineStyle: { color: 'rgba(255, 255, 255, 0.15)' },
     },
   };
 
@@ -40,6 +38,7 @@ const getAxisStyle = () => {
       axisLabel: {
         // 默认会采用标签不重叠的策略间隔显示标签，设置成 0 强制显示所有标签
         interval: 'auto',
+        color: 'rgba(255,255,255,0.85)',
       },
     }),
     yAxisStyle: cloneDeep(axisStyle),
@@ -119,11 +118,11 @@ export default {
     const { series } = options;
 
     if (Array.isArray(series) && series.length !== 0) {
-      const chartType = series[0].type;
+      const chartType = series[0].type!;
 
       if (chartType === 'line') {
         return customMerge(getChartStyle().line as ECOption, options);
-      } else if (chartType === 'bar') {
+      } else if (['bar', 'pictorialBar'].includes(chartType)) {
         return customMerge(getChartStyle().bar as ECOption, options);
       } else if (chartType === 'pie') {
         return customMerge(getChartStyle().pie as ECOption, options);

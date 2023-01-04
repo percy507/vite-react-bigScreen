@@ -1,7 +1,7 @@
 import labelBg from '@/assets/labelBg.svg';
 import pieBg from '@/assets/pieBg.svg';
-import { echartsGraphic } from '@/components/EChart';
-import type { ECOption } from '@/components/EChart/type';
+import type { ECOption } from '@/components/SuperEChart';
+import { linearGradient } from '@/components/SuperEChart';
 import { toAdaptedPx } from '@/utils';
 
 export const list1 = [
@@ -56,7 +56,7 @@ export const getSimpleChart = (data: any): ECOption => {
         barWidth: toAdaptedPx(12),
         label: { show: true, position: 'top', color: '#FFF' },
         itemStyle: {
-          color: new echartsGraphic.LinearGradient(0, 0, 0, 1, [
+          color: new linearGradient(0, 0, 0, 1, [
             { offset: 0, color: 'rgba(81,91,212,0.2)' },
             { offset: 1, color: 'rgba(81,91,212,1)' },
           ]),

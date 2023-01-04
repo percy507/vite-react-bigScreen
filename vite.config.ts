@@ -1,35 +1,33 @@
 import legacy from '@vitejs/plugin-legacy';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
+// @ts-ignore
+import { getThemeVariables } from 'antd/dist/theme';
+import autoprefixer from 'autoprefixer';
 import fs from 'fs';
-import lessToJS from 'less-vars-to-js';
 import path from 'path';
 import px2rem from 'postcss-pxtorem';
 import { defineConfig } from 'vite';
 import styleImport from 'vite-plugin-style-import';
 
 import { dependencies } from './package.json';
-import checkVscodeExtension from './plugins/check-vscode-extension';
-import eslintPlugin from './plugins/vite-plugin-eslint';
-import stylelintPlugin from './plugins/vite-plugin-stylelint';
 import uiConfig from './src/ui.config.json'; // 设计稿比例配置
 
-if (process.env.NODE_ENV === 'development') {
-  // check if required vscode extensions installed
-  checkVscodeExtension([
-    'dbaeumer.vscode-eslint',
-    'esbenp.prettier-vscode',
-    'stylelint.vscode-stylelint',
-  ]);
+// 打包时，生成一些基础的构建信息到 build.json
+if (process.env.VITE_MODE !== 'local') {
+  fs.writeFileSync(
+    path.join(__dirname, './public/build.json'),
+    JSON.stringify({
+      version: `${Date.now()}`,
+    }),
+  );
 }
 
-const themeVariables = lessToJS(
-  fs.readFileSync(path.resolve(__dirname, './src/styles/antd-variables.less'), 'utf8'),
-);
+const vendorList = ['react', 'react-router-dom', 'react-dom'];
 
 function renderChunks(deps: Record<string, string>) {
   let chunks: Record<string, string[]> = {};
   Object.keys(deps).forEach((key) => {
-    if (['react', 'react-router-dom', 'react-dom'].includes(key)) return;
+    if (vendorList.includes(key)) return;
     chunks[key] = [key];
   });
   return chunks;
@@ -37,27 +35,27 @@ function renderChunks(deps: Record<string, string>) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/',
   define: {
-    // VITE_BUILD_MODE: `"${process.env.VITE_BUILD_MODE || 'dev'}"`,
+    VITE_MODE: `"${process.env.VITE_MODE || 'dev'}"`,
+  },
+  server: {
+    host: true,
+    port: 3033,
   },
   plugins: [
-    eslintPlugin(),
-    stylelintPlugin(),
     legacy({
       targets: ['ie >= 11'],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
     }),
-    reactRefresh(),
+    react(),
     // 按需加载样式文件
     styleImport({
       libs: [
         {
           libraryName: 'antd',
           esModule: true,
-          resolveStyle: (name) => {
-            return `antd/es/${name}/style/index`;
-          },
+          resolveStyle: (name) => `antd/es/${name}/style/index`,
         },
       ],
     }),
@@ -70,6 +68,7 @@ export default defineConfig({
     },
     postcss: {
       plugins: [
+        autoprefixer(),
         px2rem({
           rootValue: uiConfig.width / uiConfig.base_num,
           unitPrecision: 5,
@@ -85,7 +84,9 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
-        modifyVars: themeVariables,
+        modifyVars: getThemeVariables({
+          dark: true,
+        }),
       },
     },
   },
@@ -102,7 +103,7 @@ export default defineConfig({
       output: {
         // 抽离公共模块代码
         manualChunks: {
-          vendor: ['react', 'react-router-dom', 'react-dom'],
+          vendor: vendorList,
           ...renderChunks(dependencies),
         },
       },
