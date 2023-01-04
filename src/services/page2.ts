@@ -124,3 +124,13 @@ export function requestCenterBlock1(params) {
     }),
   });
 }
+
+export function requestRightBlock1(params) {
+  console.log(params);
+  let v1 = 10000,
+    v2 = ~~(Math.random() * 2000 + 500),
+    v3 = ~~(Math.random() * 1000 + 200),
+    v4 = ~~(Math.random() * 1000 + 200),
+    v5 = v1 - v2 - v3 - v4;
+  return Promise.resolve({ data: { v1, v2, v3, v4, v5 } });
+}

@@ -144,9 +144,8 @@ function getChart(data: any[], zoom: number, showDataZoom = false): ECOption {
         symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
         itemStyle: {
           color: new linearGradient(0, 1, 0, 0, [
-            { offset: 0, color: '#2ED3D3' },
-            { offset: 0.27, color: '#3AC7F3' },
-            { offset: 1, color: '#0B59A2' },
+            { offset: 0, color: '#DB9E29' },
+            { offset: 1, color: '#F3D226' },
           ]),
         },
         barWidth: px(26),
