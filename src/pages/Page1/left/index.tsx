@@ -86,7 +86,7 @@ const Block14 = () => {
     columnWidth: [toAdaptedPx(180), toAdaptedPx(140)],
     data: new Array(12).fill(0).map(() => {
       return [
-        `杭州${~~(Math.random() * 80000)}公司`,
+        `杭州${~~(Math.random() * 80000)}有限公司公司有限公司公司`,
         `地址${~~(Math.random() * 80000)}`,
         `${~~(Math.random() * 80000)}万元`,
       ];

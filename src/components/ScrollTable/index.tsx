@@ -58,6 +58,15 @@ export function ScrollTable(props: ScrollTableProps) {
 
   const tableConfig: ScrollTableConfig = merge(defaultConfig, config);
 
+  tableConfig.data = (tableConfig.data || []).map((row) =>
+    row.map((el) => {
+      let frag = document
+        .createRange()
+        .createContextualFragment(`${el !== null ? el : ''}`);
+      return `<span title="${frag.textContent}">${el}</span>`;
+    }),
+  );
+
   const computeHeight = () => {
     const rowHeight = toAdaptedPx(40);
     const headerHeight = tableConfig.headerHeight || defaultConfig.headerHeight;
