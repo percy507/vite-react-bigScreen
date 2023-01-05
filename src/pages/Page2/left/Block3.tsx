@@ -8,6 +8,8 @@ import { requestLeftBlock3 } from '@/services/page2';
 import { atomSelectedParams } from '@/store/page2';
 import { formatNumber, toAdaptedPx } from '@/utils';
 
+// import styles from './Block3.module.less'
+
 export default function Block3() {
   const params = useAtomValue(atomSelectedParams);
   const [data, setData] = useState<any>([]);

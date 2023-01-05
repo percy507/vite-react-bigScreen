@@ -1,0 +1,71 @@
+.MaximizeModal {
+  top: 200px;
+
+  :global {
+    .ant-modal-content {
+      background: rgba(3, 21, 41, 0.8);
+      border: 2px solid rgba(44, 166, 255, 0.3);
+      box-shadow: none;
+    }
+
+    .ant-modal-body {
+      padding: 36px 28px;
+    }
+
+    .ant-modal-close {
+      display: none;
+    }
+  }
+
+  .deco1 {
+    position: absolute;
+    top: -6px;
+    left: -2px;
+    z-index: 10;
+    width: 56px;
+    height: 12px;
+  }
+
+  .closeIcon {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .container {
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-right: 10px;
+    background: #282828;
+    border-radius: 8px;
+
+    img {
+      width: 24px;
+    }
+  }
+
+  .title {
+    color: #fff;
+    font-weight: 600;
+    font-size: 32px;
+  }
+
+  .content {
+  }
+}

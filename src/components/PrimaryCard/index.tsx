@@ -5,13 +5,12 @@ import { useState } from 'react';
 
 import styles from './style.module.less';
 
-export interface PrimaryCardProps extends React.ComponentPropsWithRef<'div'> {
-  title: string;
+export interface PrimaryCardProps
+  extends Omit<React.ComponentPropsWithRef<'div'>, 'title'> {
+  title: React.ReactNode;
   tabs?: TabPaneProps[];
   children?: React.ReactNode;
 }
-
-const { TabPane } = Tabs;
 
 export function PrimaryCard(props: PrimaryCardProps) {
   const { title, tabs = [], children = null, className, ...restProps } = props;
@@ -48,15 +47,15 @@ export function PrimaryCard(props: PrimaryCardProps) {
       </div>
       <div className={styles.pcard__content}>
         {hasTabs ? (
-          <Tabs destroyInactiveTabPane onChange={onTabChange}>
-            {tabs.map((el, index) => {
-              return (
-                <TabPane key={index} tab={el.tab} tabKey={`${index}`}>
-                  {el.children}
-                </TabPane>
-              );
-            })}
-          </Tabs>
+          <Tabs
+            destroyInactiveTabPane
+            onChange={onTabChange}
+            items={tabs.map((el, index) => ({
+              key: `${index}`,
+              label: el.tab,
+              children: el.children,
+            }))}
+          />
         ) : (
           children
         )}

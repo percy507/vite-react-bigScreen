@@ -1,0 +1,117 @@
+.block2 {
+  line-height: 1;
+
+  .title {
+    display: flex;
+    align-items: center;
+
+    .maxBtn {
+      margin-left: 10px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
+
+.modalContentContainer {
+  width: 877px;
+  height: 440px;
+}
+
+.modalContent {
+  display: inline-block;
+  width: 480px;
+  line-height: 1;
+  transform: scale(1.81);
+  transform-origin: 0 0;
+}
+
+.cardList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 15px;
+}
+
+.miniCard {
+  width: 140px;
+}
+
+.cardLine {
+  height: 5px;
+  margin-bottom: 2px;
+  background: #262b2e;
+  border: 1px solid #424242;
+}
+
+.cardContent {
+  padding: 10px;
+  background: #121618;
+  border: 1px solid #424242;
+
+  &.cardActive {
+    border: 1px solid #0e81ec;
+  }
+
+  & > div {
+    display: flex;
+    align-items: flex-end;
+
+    &:first-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.cardNum {
+  margin-right: 4px;
+  color: #6cdcff;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.cardUnit {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.cardLabel {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.chart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chartTitle {
+  margin-top: -6px;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.chartItem {
+  text-align: center;
+
+  &Value {
+    margin-right: 3px;
+    color: #86e2ff;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &Unit {
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 20px;
+  }
+}

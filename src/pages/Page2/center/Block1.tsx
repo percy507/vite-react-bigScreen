@@ -3,8 +3,6 @@ import { registerMap } from 'echarts/core';
 import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 
-import map330000 from '@/assets/geojson/330000_full.json';
-import textureImg from '@/assets/page2/texture.jpg';
 import { ModalOnCenter } from '@/components/ModalOnCenter';
 import type { EChartInstance, ECOption } from '@/components/SuperEChart';
 import { SuperEChart } from '@/components/SuperEChart';
@@ -13,6 +11,8 @@ import { atomSelectedParams } from '@/store/page2';
 import uiConfig from '@/ui.config.json';
 import { toAdaptedPx } from '@/utils';
 
+import map330000 from './assets/330000_full.json';
+import textureImg from './assets/texture.jpg';
 import styles from './style.module.less';
 
 registerMap('330000', map330000 as any);
@@ -53,14 +53,18 @@ function DataModal({
   chart?: EChartInstance;
 }) {
   const [v1, setV1] = useState(false);
+  const v1Ref = useRef(v1);
+  v1Ref.current = v1;
+
   const [modalPos, setModalPos] = useState({
     left: `calc(50% - ${toAdaptedPx(160)}px)`,
     top: `calc(50% - ${toAdaptedPx(160)}px)`,
   });
-  const [modalData, setModalData] = useState<Record<string, any>>({});
 
-  const v1Ref = useRef(v1);
-  v1Ref.current = v1;
+  const [modalData, setModalData] = useState<Record<string, any>>({});
+  const modalDataRef = useRef(modalData);
+  modalDataRef.current = modalData;
+
   const paramsRef = useRef(params);
   paramsRef.current = params;
 
@@ -89,15 +93,17 @@ function DataModal({
   useEffect(() => {
     if (!chart) return;
     let handler = (params) => {
-      if (params.seriesType === 'scatter3D' && params.event && v1Ref.current == false) {
+      if (params.seriesType === 'scatter3D' && params.event) {
         const item = data.find((el: any) => el.id == (params.data as any).id);
         if (!item) return;
-        setModalData(item);
-        setModalPos({
-          left: `${(params.event.event as MouseEvent).clientX}px`,
-          top: `${(params.event.event as MouseEvent).clientY}px`,
-        });
-        setV1(true);
+        if (modalDataRef.current?.id !== item.id || v1Ref.current === false) {
+          setModalData(item);
+          setModalPos({
+            left: `${(params.event.event as MouseEvent).clientX}px`,
+            top: `${(params.event.event as MouseEvent).clientY}px`,
+          });
+          setV1(true);
+        }
       } else {
         if (paramsRef.current?.projectCode) return;
         setV1(false);
@@ -158,6 +164,15 @@ function getChart(data: any[]): ECOption {
       };
     });
 
+  const viewControl = {
+    // animation 必须设置为false，否则在切换地图时，渲染有时会异常（频率较高）
+    animation: false,
+    panMouseButton: 'left',
+    rotateMouseButton: 'middle',
+    distance: 85,
+    center: [-3, 15, 30],
+    alpha: 50,
+  };
   const series: ECOption['series'] = [
     {
       show: true,
@@ -169,15 +184,7 @@ function getChart(data: any[]): ECOption {
       colorMaterial: { detailTexture: textureImg, textureTiling: 1 },
       itemStyle: { opacity: 1, color: '#fff', borderWidth: 1, borderColor: '#47E0DA' },
       emphasis: { label: { show: false }, itemStyle: { opacity: 1, color: '#fff' } },
-      viewControl: {
-        // animation 必须设置为false，否则在切换地图时，渲染有时会异常（频率较高）
-        animation: false,
-        panMouseButton: 'left',
-        rotateMouseButton: 'middle',
-        distance: 85,
-        center: [-3, 15, 30],
-        alpha: 50,
-      },
+      viewControl,
     },
     {
       // @ts-ignore
@@ -225,14 +232,7 @@ function getChart(data: any[]): ECOption {
       type: 'map3D',
       map: '330000', // 地图类型
       bottom: toAdaptedPx(0),
-      viewControl: {
-        animation: false,
-        panMouseButton: 'left',
-        rotateMouseButton: 'middle',
-        distance: 85,
-        center: [-3, 15, 30],
-        alpha: 50,
-      },
+      viewControl,
     },
     series,
   };

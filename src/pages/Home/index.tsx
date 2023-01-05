@@ -11,6 +11,9 @@ export default function HomePage() {
       <div>
         <Link to="/p2">大屏2（echarts 3d地图）</Link>
       </div>
+      <div>
+        <Link to="/p3">大屏3（echarts 3d地图 + 下钻）</Link>
+      </div>
     </div>
   );
 }

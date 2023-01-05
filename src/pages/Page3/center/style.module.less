@@ -1,0 +1,69 @@
+.center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+.mapTooltip {
+  width: 408px !important;
+  height: 258px !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  background-color: rgba(0, 51, 153, 0.8) !important;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: none !important;
+  box-shadow: none !important;
+
+  .tooltipTitle {
+    padding: 16px 0 0 105px;
+    color: #4ed2fc;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  .tooltipItemList {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 30px;
+    padding-left: 26px;
+  }
+
+  .tooltipItem {
+    width: 180px;
+    height: 100px;
+
+    &Title {
+      color: #fff;
+      font-weight: normal;
+      font-size: 16px;
+    }
+
+    &Content {
+      margin-top: 12px;
+
+      &Value {
+        color: #4ed2fc;
+        font-weight: 600;
+        font-size: 36px;
+
+        &__pov {
+          color: #ff4e50;
+        }
+
+        &__nag {
+          color: #3dffb9;
+        }
+      }
+
+      &Unit {
+        color: rgba(255, 255, 255, 0.65);
+        font-weight: normal;
+        font-size: 18px;
+      }
+    }
+  }
+}

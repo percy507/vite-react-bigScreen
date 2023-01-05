@@ -17,5 +17,9 @@ export const routeList: RouteObject[] = [
     path: 'p2',
     element: lr(lazy(() => import('@/pages/Page2'))),
   },
-  { path: '*', element: navigateTo('hs') },
+  {
+    path: 'p3',
+    element: lr(lazy(() => import('@/pages/Page3'))),
+  },
+  { path: '*', element: navigateTo('/') },
 ];

@@ -6,7 +6,7 @@ import { toAdaptedPx } from '@/utils';
 
 export default function Block3() {
   return (
-    <PrimaryCard title="模块6">
+    <PrimaryCard title="模块3">
       <Empty style={{ height: toAdaptedPx(250) }} />
     </PrimaryCard>
   );
