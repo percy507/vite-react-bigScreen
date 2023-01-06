@@ -36,3 +36,12 @@ pnpm preview          # 本地打包并预览打包后的页面
 Chrome默认的最小字体大小是12px，所以需要修改chrome最小字号为0，从而适配小屏幕
 chrome://settings/fonts
 ```
+
+```bash
+# 如何修改让项目成为某个项目的子路由？
+1. 修改 vite.config.js 的 base 配置（注意末尾加上斜杠）
+base: process.env.VITE_MODE === 'local' ? '/' : '/dashboard/',
+
+2. 修改 BrowserRouter 的 basename
+<BrowserRouter basename={VITE_MODE === 'local' ? '/' : '/dashboard'} >
+```
