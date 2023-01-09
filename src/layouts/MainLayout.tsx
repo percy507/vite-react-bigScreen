@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import { requestUserInfo } from '@/services/user';
 import { atomUserInfo } from '@/store/app';
 
-export default function AppMainLayout() {
+export default function MainLayout() {
   const [userInfo, setUserInfo] = useAtom(atomUserInfo);
 
   console.log('userInfo', userInfo);

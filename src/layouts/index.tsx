@@ -8,7 +8,7 @@ import { getAuthToken, setAuthToken } from '@/utils/storage';
 
 import { routeList } from './config';
 
-export default function AppLayout() {
+export function AppLayout() {
   const [params] = useSearchParams();
   const token = params.get('token');
   let isLogin = !!getAuthToken() || true;
@@ -26,7 +26,9 @@ export default function AppLayout() {
         <Route
           path="/"
           element={
-            isLogin ? lr(lazy(() => import('./layout'))) : navigateTo('/access_denied')
+            isLogin
+              ? lr(lazy(() => import('./MainLayout')))
+              : navigateTo('/access_denied')
           }>
           {routeList.map((el, index) => {
             // @ts-ignore

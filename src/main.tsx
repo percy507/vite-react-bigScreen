@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 
 moment.locale('zh-cn');
 
