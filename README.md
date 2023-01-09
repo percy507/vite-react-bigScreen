@@ -44,4 +44,25 @@ base: process.env.VITE_MODE === 'local' ? '/' : '/dashboard/',
 
 2. 修改 BrowserRouter 的 basename
 <BrowserRouter basename={VITE_MODE === 'local' ? '/' : '/dashboard'} >
+
+3. 修改nginx
+server {
+  listen 8080;
+  server_name localhost;
+  charset utf-8,gbk;
+
+  location / {
+    root /home/xxx/project111/dist;
+    try_files $uri $uri/ /index.html;
+  }
+
+  location /dashboard {
+    # 这里必须使用 alias，细节看链接
+    # https://www.jianshu.com/p/d9aefefcaa45
+    alias /home/xxx/project222/dist/;
+    # 这里的最后必须使用 `/dashboard/index.html`，如果使用 `/index.html`，则在路由为 `/dashboard/page1`
+    # 的页面刷新后，会重置到 `/`，从而访问 project111 的资源
+    try_files $uri $uri/ /dashboard/index.html;
+  }
+}
 ```
