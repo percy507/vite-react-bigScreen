@@ -84,9 +84,10 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
-        modifyVars: getThemeVariables({
-          dark: true,
-        }),
+        modifyVars: {
+          ...getThemeVariables({ dark: true }),
+          '@primary-color': '#2194FF',
+        },
       },
     },
   },
